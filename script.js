@@ -1,6 +1,6 @@
 // get the required elements from the DOM
 const containerElement = document.querySelector('body');
-const boxElement = document.querySelector('.box');
+const elementToAnimate = document.querySelector('.box');
 
 const animateBox = {
   getElementHeight: function (element) {
@@ -10,10 +10,10 @@ const animateBox = {
     return element.offsetWidth;
   },
 
-  moveBox: function (boxElement) {
-    // set the top and left position of the box
-    boxElement.style.left = this.xPosition + 'px';
-    boxElement.style.top = this.yPosition + 'px';
+  updatePosition: function (elementToAnimate) {
+    // update top and left position of the box
+    elementToAnimate.style.left = this.xPosition + 'px';
+    elementToAnimate.style.top = this.yPosition + 'px';
   },
 
   init: function (options) {
@@ -32,16 +32,16 @@ const animateBox = {
     this.yPosition = this.yPosition + this.yMoveBox;
   },
 
-  start: function (containerElement, boxElement) {
+  start: function (containerElement, elementToAnimate) {
     // get required values for the animation (height, width of the container and box)
     const containerHeight = this.getElementHeight(containerElement);
     const containerWidth = this.getElementWidth(containerElement);
-    const boxHeight = this.getElementHeight(boxElement);
-    const boxWidth = this.getElementWidth(boxElement);
+    const boxHeight = this.getElementHeight(elementToAnimate);
+    const boxWidth = this.getElementWidth(elementToAnimate);
 
-    // create a loop with setInterval to animate the box
+    // create a loop with setInterval for the animation
     setInterval(() => {
-      this.moveBox(boxElement);
+      this.updatePosition(elementToAnimate);
 
       // change the direction of the box when it reaches the edge (left or right)
       if (this.xPosition + boxWidth >= containerWidth || this.xPosition <= 0) {
@@ -53,14 +53,14 @@ const animateBox = {
         this.yMoveBox = -this.yMoveBox;
       }
 
-      //   set the new values for the next iteration
+      // update values for the next iteration
       this.xPosition = this.xPosition + this.xMoveBox;
       this.yPosition = this.yPosition + this.yMoveBox;
     }, this.intervalTime);
   }
 };
 
-// call the init function to initialize required values
+// call the init function to initialize the animation with required values
 animateBox.init({
   intervalTime: 1000,
   xMoveBox: 10,
@@ -70,4 +70,4 @@ animateBox.init({
 });
 
 // call the start function to start the animation
-animateBox.start(containerElement, boxElement);
+animateBox.start(containerElement, elementToAnimate);
