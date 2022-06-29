@@ -1,3 +1,4 @@
+// get the required elements from the DOM
 const containerElement = document.querySelector('body');
 const boxElement = document.querySelector('.box');
 
