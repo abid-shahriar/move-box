@@ -16,7 +16,7 @@ const animateBox = {
     boxElement.style.top = this.yPosition + 'px';
   },
 
-  init: function (boxElement, options) {
+  init: function (options) {
     // destructure the properties from the options object
     const { intervalTime, xMoveBox, yMoveBox, xPosition, yPosition } = options || {};
 
@@ -61,7 +61,7 @@ const animateBox = {
 };
 
 // call the init function to initialize required values
-animateBox.init(boxElement, {
+animateBox.init({
   intervalTime: 1000,
   xMoveBox: 10,
   yMoveBox: 10,
